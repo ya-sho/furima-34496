@@ -2,32 +2,34 @@
 
   usersテーブル
 
-| Column     | Type    | Options     |    
-| ---------  | ------  | ----------  |
-| nickname   | string  | null: false |
-| email      | string  | null: false |
-| password   | string  | null: false |
-| name       | string  | null: false |
-| name_kana  | string  | null: false |
-| birth      | string  | null: false | 
+| Column             | Type    | Options      |    
+| ---------------    | ------  | ----------   |
+| nickname           | string  | null: false  |
+| email              | string  | unique: true |
+| encrypted_password | string  | null: false  |
+| first_name         | string  | null: false  |
+| last_name          | string  | null: false  |
+| first_name_kana    | string  | null: false  |
+| last_name_kana     | string  | null: false  |
+| birth              | date    | null: false  | 
 
    Association
 
 - has_many :items
-- has_many :purchases 
+
 
 itemsテーブル
 
 | Column      | Type       | Options                        |    
 | ---------   | ------     | -----------------------------  |
-| item_name   | string     | null: false                    |
+| name        | string     | null: false                    |
 | explanation | text       | null: false                    |
-| category    | text       | null: false                    |
-| status      | text       | null: false                    |
-| cost        | text       | null: false                    |
-| area        | text       | null: false                    |
-| days        | text       | null: false                    |
-| price       | Integer    | null: false                    |
+| category_id | integer    | null: false                    |
+| status_id   | integer    | null: false                    |
+| cost_id     | integer    | null: false                    |
+| area_id     | integer    | null: false                    |
+| days_id     | integer    | null: false                    |
+| price       | integer    | null: false                    |
 | user        | references | null: false, foreign_key: true |
 
 
@@ -35,7 +37,8 @@ itemsテーブル
 
 - belongs_to :user
 - has_many   :comments
-  has_one    :purchase 
+  has_one    :address
+  
 
 commentsテーブル
 
@@ -49,37 +52,22 @@ commentsテーブル
    
 - belongs_to :item
 
- purchaseテーブル
-
-| Column        | Type        | Options                        |    
-| ---------     | ----------  | -----------------------------  |
-| card_info     | Integer     | null: false                    |
-| card_limit    | Integer     | null: false                    |
-| security_code | Integer     | null: false                    | 
-| user          | references  | null: false, foreign_key: true |
-| item          | references  | null: false, foreign_key: true |
-
-
-   Association
-   
-- belongs_to :user
-- belongs_to :item
-  has_one    :address
-
+ 
 
 addressテーブル
 
-| Column       | Type        | Options                        |    
-| ---------    | ----------  | -----------------------------  |
-| postal_code  | Integer     | null: false                    |
-| prefectures  | string      | null: false                    |
-| municipality | string      | null: false                    | 
-| address      | string      | null: false                    | 
-| building     | string      | null: false                    |
-| phone_number | Integer     | null: false                    | 
-| purchase     | references  | null: false, foreign_key: true |
+| Column          | Type        | Options                        |    
+| --------------  | ----------  | -----------------------------  |
+| postal_code     | string      | null: false                    |
+| prefecture_id   | string      | null: false                    |
+| municipality    | string      | null: false                    | 
+| address         | string      | null: false                    | 
+| building        | string      |                                |
+| phone_number    | string      | null: false                    | 
+| purchase        | references  | null: false, foreign_key: true |
 
    Association
    
-- belongs_to :purchase
+   belongs_to :item 
+
 
