@@ -38,7 +38,7 @@ itemsテーブル
 
 - belongs_to  :user
 - has_many    :comments
-  belongs_to  :purchase
+  has_one     :purchase
   
 
 commentsテーブル
