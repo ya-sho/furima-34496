@@ -16,7 +16,7 @@
    Association
 
 - has_many :items
-  has_one :purchase 
+  has_many :purchases
 
 
 itemsテーブル
@@ -58,6 +58,8 @@ purchasesテーブル
 | Column          | Type        | Options                        |    
 | --------------  | ----------  | -----------------------------  |
 | user            | references  | null: false, foreign_key: true |
+| item            | references  | null: false, foreign_key: true |
+
 
   belongs_to :user 
   has_one    :address
