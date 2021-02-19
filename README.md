@@ -36,8 +36,9 @@ itemsテーブル
 
    Association
 
-- belongs_to :user
-- has_many   :comments
+- belongs_to  :user
+- has_many    :comments
+  belongs_to  :purchase
   
 
 commentsテーブル
@@ -62,6 +63,7 @@ purchasesテーブル
 
 
   belongs_to :user 
+  has_many   :items 
   has_one    :address
 
 addressesテーブル
