@@ -37,7 +37,7 @@ itemsテーブル
 
 - belongs_to :user
 - has_many   :comments
-  has_one    :address
+  has_one    :purchase 
   
 
 commentsテーブル
@@ -52,14 +52,22 @@ commentsテーブル
    
 - belongs_to :item
 
- 
 
-addressテーブル
+purchasesテーブル
+
+| Column          | Type        | Options                        |    
+| --------------  | ----------  | -----------------------------  |
+| item            | references  | null: false, foreign_key: true |
+
+  belongs_to :item
+  has_one    :address
+
+addressesテーブル
 
 | Column          | Type        | Options                        |    
 | --------------  | ----------  | -----------------------------  |
 | postal_code     | string      | null: false                    |
-| prefecture_id   | string      | null: false                    |
+| area_id         | string      | null: false                    |
 | municipality    | string      | null: false                    | 
 | address         | string      | null: false                    | 
 | building        | string      |                                |
@@ -68,6 +76,6 @@ addressテーブル
 
    Association
    
-   belongs_to :item 
+   belongs_to :purchase 
 
 
