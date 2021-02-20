@@ -16,7 +16,7 @@
    Association
 
 - has_many :items
-  has_many :purchases
+  has_many :orders
 
 
 itemsテーブル
@@ -38,7 +38,7 @@ itemsテーブル
 
 - belongs_to  :user
 - has_many    :comments
-  has_one     :purchase
+  has_one     :order
   
 
 commentsテーブル
@@ -54,7 +54,7 @@ commentsテーブル
 - belongs_to :item
 
 
-purchasesテーブル
+ordersテーブル
 
 | Column          | Type        | Options                        |    
 | --------------  | ----------  | -----------------------------  |
@@ -80,6 +80,6 @@ addressesテーブル
 
    Association
    
-   belongs_to :purchase 
+   belongs_to :order
 
 
