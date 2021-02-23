@@ -6,12 +6,11 @@ class User < ApplicationRecord
   
   has_many :items 
   has_many :orders 
-  validates :password,length: { minimum: 6 }
 
   
   validates_format_of :last_name_kana,  with: /\A[ァ-ヶー－]+\z/
   validates_format_of :first_name_kana, with: /\A[ァ-ヶー－]+\z/
-  validates_format_of :password,        with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{7,}/
+  validates_format_of :password,        with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/
   validates_format_of :last_name,       with: /\A[ぁ-んァ-ン一-龥]/
   validates_format_of :first_name,      with: /\A[ぁ-んァ-ン一-龥]/
 

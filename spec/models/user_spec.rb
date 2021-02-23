@@ -6,13 +6,13 @@ RSpec.describe User, type: :model do
   describe 'ユーザー新規登録' do
     context '新規登録がうまくいく時' do 
       it 'passwordが6文字で登録できる' do
-        @user.password = "1111aaa"
-        @user.password_confirmation = "1111aaa"
+        @user.password = "111aaa"
+        @user.password_confirmation = "111aaa"
         expect(@user).to be_valid
       end
       it 'passwordが半角英数字が混合されていれば登録できる' do
-        @user.password = "00000vv"
-        @user.password_confirmation = "00000vv"
+        @user.password = "0000vv"
+        @user.password_confirmation = "0000vv"
         expect(@user).to be_valid 
       end
     end
