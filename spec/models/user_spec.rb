@@ -3,6 +3,9 @@ RSpec.describe User, type: :model do
   before do 
     @user=FactoryBot.build(:user)
   end
+  it '全て正常' do
+    expect(@user.valid?).to eq true
+  end
   describe 'ユーザー新規登録' do
     context '新規登録がうまくいく時' do 
       it 'passwordが6文字で登録できる' do
