@@ -4,7 +4,20 @@ RSpec.describe User, type: :model do
     @user=FactoryBot.build(:user)
   end
   describe 'ユーザー新規登録' do
-   context 'ユーザー情報' do 
+    context '新規登録がうまくいく時' do 
+      it 'passwordが6文字で登録できる' do
+        @user.password = "1111aaa"
+        @user.password_confirmation = "1111aaa"
+        expect(@user).to be_valid
+      end
+      it 'passwordが半角英数字が混合されていれば登録できる' do
+        @user.password = "00000vv"
+        @user.password_confirmation = "00000vv"
+        expect(@user).to be_valid 
+      end
+    end
+
+   context '新規登録がうまくいかない時' do 
     it 'nicknameが空だと登録できない' do
       @user.nickname=''
       @user.valid?
@@ -47,6 +60,11 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("パスワードは不正な値です")
     end
+    it 'passwordが全角では登録できない' do 
+      @user.password= "あＡ１いＢ２"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("パスワードは不正な値です")
+    end
     it 'password_confirmationが空だと登録できない' do 
       @user.password_confirmation=''
       @user.valid?
@@ -58,8 +76,6 @@ RSpec.describe User, type: :model do
       @user.valid? 
       expect(@user.errors.full_messages).to include( "パスワード（確認用）とパスワードの入力が一致しません")
     end 
-  end
-   context '本人情報確認' do
     it 'ユーザ本名は、名字が空だと登録できない' do
        @user.last_name=''
        @user.valid?
@@ -70,6 +86,16 @@ RSpec.describe User, type: :model do
        @user.valid?
        expect(@user.errors.full_messages).to include("First nameを入力してください")
      end
+     it 'ユーザ本名は、名字が半角だと登録できない' do
+      @user.last_name='ｽｽﾞｷ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last nameは不正な値です")
+    end
+    it 'ユーザ本名は、名前が半角だと登録できない' do
+      @user.first_name='ｼﾝﾔ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First nameは不正な値です")
+    end
      it 'ユーザ本名(フリガナ)は、名字が空だと登録できない' do
       @user.last_name_kana=''
       @user.valid?
@@ -90,17 +116,27 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("First name kanaは不正な値です")
     end 
+    it 'ユーザ本名は、名字が半角だと登録できない' do
+      @user.last_name_kana='ｽｽﾞｷ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name kanaは不正な値です")
+    end
+    it 'ユーザ本名は、名前が半角だと登録できない' do
+      @user.first_name_kana='ｼﾝﾔ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kanaは不正な値です")
+    end
     it '生年月日が空だと登録できない' do
       @user.birth=''
       @user.valid?
       expect(@user.errors.full_messages).to include("Birthを入力してください")
-   end
+    end
 
      
    
    
    
-  end
+   end
 
   end
 end
