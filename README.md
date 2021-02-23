@@ -7,16 +7,16 @@
 | nickname           | string  | null: false               |
 | email              | string  | null: false, unique: true |
 | encrypted_password | string  | null: false               |
-| first_name         | string  | null: false               |
 | last_name          | string  | null: false               |
-| first_name_kana    | string  | null: false               |
+| first_name         | string  | null: false               |
 | last_name_kana     | string  | null: false               |
+| first_name_kana    |  string | null: false               |
 | birth              | date    | null: false               | 
 
    Association
 
 - has_many :items
-  has_many :purchases
+  has_many :orders
 
 
 itemsテーブル
@@ -38,7 +38,7 @@ itemsテーブル
 
 - belongs_to  :user
 - has_many    :comments
-  has_one     :purchase
+  has_one     :order
   
 
 commentsテーブル
@@ -54,7 +54,7 @@ commentsテーブル
 - belongs_to :item
 
 
-purchasesテーブル
+ordersテーブル
 
 | Column          | Type        | Options                        |    
 | --------------  | ----------  | -----------------------------  |
@@ -80,6 +80,6 @@ addressesテーブル
 
    Association
    
-   belongs_to :purchase 
+   belongs_to :order
 
 
