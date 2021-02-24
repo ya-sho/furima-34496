@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   belongs_to :user 
   has_many :comments 
   has_one :order 
+  has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -9,7 +10,7 @@ class Item < ApplicationRecord
   belongs_to :cost
   belongs_to :area
   belongs_to :days
-  has_one_attached :image
+  
 
   
   validates :category_id, numericality: { other_than: 1 }
@@ -27,9 +28,12 @@ class Item < ApplicationRecord
   validates_format_of :price,  with: /\A[-]?[0-9]+(\.[0-9]+)?\z/
 
   with_options presence: true do
-    validates : image
-    
+    validates :image
+    validates :name
+    validates :explanation
+
   end
+
 
 end
 
