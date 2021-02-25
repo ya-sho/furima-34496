@@ -44,7 +44,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Areaは数値で入力してください")
     end
 
-    it 'カテゴリーが1では登録できない' do #
+    it 'カテゴリーが1では登録できない' do 
       @item.category_id=1
       @item.valid?
       expect(@item.errors.full_messages).to include("Categoryは1以外の値にしてください")
@@ -65,13 +65,23 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Areaは1以外の値にしてください")
     end
 
-    it '発送までの日数が空では登録できない' do #
+    it '発送までの日数が空では登録できない' do 
       @item.days_id=''
       @item.valid?
       expect(@item.errors.full_messages).to include("Daysは数値で入力してください")
     end
-    it '商品の値段が全角数字では登録できない' do 
-      @item.price='３００'
+    it '商品の値段が全角文字では登録できない' do 
+      @item.price='あいう'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Priceは数値で入力してください")
+    end
+    it '商品の値段が半角英数混合では登録できない' do 
+      @item.price='abc123'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Priceは数値で入力してください")
+    end
+    it '商品の値段が半角英語では登録できない' do 
+      @item.price='abc'
       @item.valid?
       expect(@item.errors.full_messages).to include("Priceは数値で入力してください")
     end
