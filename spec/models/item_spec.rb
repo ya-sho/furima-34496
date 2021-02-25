@@ -44,6 +44,20 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("Daysは数値で入力してください")
     end
-
+    it '商品の値段が全角数字では登録できない' do 
+      @item.price='３００'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Priceは数値で入力してください")
+    end
+    it '商品の値段が299円以下では登録できない' do 
+      @item.price='299'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Priceは300以上の値にしてください")
+    end
+    it '商品の値段が10,000,000円以上では登録できない' do 
+      @item.price='10000000'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Priceは10000000より小さい値にしてください")
+    end
   end
 end

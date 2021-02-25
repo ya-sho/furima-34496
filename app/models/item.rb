@@ -10,19 +10,19 @@ class Item < ApplicationRecord
   belongs_to :cost
   belongs_to :area
   belongs_to :days
-  
 
-  
-  validates :category_id, numericality: { other_than: 1 }
-  validates :status_id,   numericality: { other_than: 1 }
-  validates :cost_id,     numericality: { other_than: 1 }
-  validates :area_id,     numericality: { other_than: 1 }
-  validates :days_id,     numericality: { other_than: 1 }
+  with_options numericality: { other_than: 1 } do
+  validates :category_id
+  validates :status_id
+  validates :cost_id
+  validates :area_id
+  validates :days_id
+  end
 
   validates :price,
     numericality: {
       greater_than_or_equal_to: 300,
-      less_than: 9999999,
+      less_than: 10000000,
     }
 
   validates_format_of :price,  with: /\A[-]?[0-9]+(\.[0-9]+)?\z/
@@ -31,7 +31,6 @@ class Item < ApplicationRecord
     validates :image
     validates :name
     validates :explanation
-
   end
 
 
