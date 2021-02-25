@@ -70,6 +70,11 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("Daysは数値で入力してください")
     end
+    it '発送までの日数が1日では登録できない' do 
+      @item.days_id=1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Daysは1以外の値にしてください")
+    end
     it '商品の値段が全角文字では登録できない' do 
       @item.price='あいう'
       @item.valid?
