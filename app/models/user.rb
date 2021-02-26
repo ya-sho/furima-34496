@@ -3,11 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
-  has_many :items 
-  has_many :orders 
 
-  
+  has_many :items
+  has_many :orders
+
   validates_format_of :last_name_kana,  with: /\A[ァ-ヶー－]+\z/
   validates_format_of :first_name_kana, with: /\A[ァ-ヶー－]+\z/
   validates_format_of :password,        with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/
@@ -18,10 +17,9 @@ class User < ApplicationRecord
     validates :password_confirmation
     validates :nickname
     validates :last_name
-    validates :first_name 
+    validates :first_name
     validates :last_name_kana
     validates :first_name_kana
     validates :birth
-  end 
-  
+  end
 end
