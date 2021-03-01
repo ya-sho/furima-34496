@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order('created_at DESC')
+    @order=Order.new 
   end
 
   def new
@@ -21,6 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+      
   end
 
   def edit
@@ -50,9 +52,15 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+
   end
 
   def reset_item
-    redirect_to action: :index unless current_user.id == @item.user_id
+    
+    unless 
+      current_user.id == @item.user_id && @item.order.nil?
+    end
+    redirect_to action: :index 
+
   end
 end
