@@ -80,7 +80,7 @@ RSpec.describe OrderAddress, type: :model do
       expect(@order_address.errors.full_messages).to include('Phone numberは不正な値です')
     end
     it '電話番号が11桁以内でないと登録できない' do
-      @order_address.phone_number = 123_456_789_876
+      @order_address.phone_number = '123456789876'
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include('Phone numberは不正な値です')
     end
