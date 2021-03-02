@@ -8,7 +8,7 @@ RSpec.describe OrderAddress, type: :model do
       @order_address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
       sleep 0.1
     end
-    
+  context '商品購入に成功した時' do
     it 'すべての情報があれば登録できる' do
       expect(@order_address).to be_valid
     end
@@ -16,7 +16,19 @@ RSpec.describe OrderAddress, type: :model do
       @order_address.building=' '
       expect(@order_address).to be_valid
     end
+  end
 
+  context '商品購入に失敗した時' do
+    it 'user_idが空だと保存できない' do
+      @order_address.user_id = ' '
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Userを入力してください")
+    end
+    it 'item_idが空だと保存できない' do
+      @order_address.item_id = ' '
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Itemを入力してください")
+    end
     it '郵便番号が空だと保存できない' do
       @order_address.postal_code = ' '
       @order_address.valid?
@@ -77,5 +89,6 @@ RSpec.describe OrderAddress, type: :model do
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include('Tokenを入力してください')
     end
+  end
   end
 end
