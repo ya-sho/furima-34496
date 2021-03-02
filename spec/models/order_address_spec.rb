@@ -8,8 +8,12 @@ RSpec.describe OrderAddress, type: :model do
       @order_address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
       sleep 0.1
     end
-
+    
     it 'すべての情報があれば登録できる' do
+      expect(@order_address).to be_valid
+    end
+    it '建物が空でも登録できる' do
+      @order_address.building=' '
       expect(@order_address).to be_valid
     end
 

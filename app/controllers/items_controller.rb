@@ -54,8 +54,9 @@ class ItemsController < ApplicationController
   end
 
   def reset_item
-    unless current_user.id == @item.user_id && @item.order.nil?
-    end
+    if current_user.id != @item.user_id || @item.order.present?
     redirect_to action: :index
+    end
   end
+
 end
